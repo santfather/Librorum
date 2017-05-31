@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <context:component-scan base-package="com.web.controller"/>
+    <context:annotation-config/>
+    <import resource="classpath*:beans-services.xml"/>
+    <import resource="classpath*:beans-dao.xml"/>
+    <mvc:resources mapping="/resources/**" location="assets"/>
+    <mvc:resources mapping="/resources/**" location="WEB-INF/taglibs"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <value>/WEB-INF/tiles.xml</value>
+        </property>
+    </bean>
+
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </bean>
+
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>-->
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:i18n/messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+        <property name="cookieName" value="LocaleCookie"></property>
+        <property name="cookieMaxAge" value="400000"></property>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="locale"/>
+        </bean>
+    </mvc:interceptors>
+
+  <!--  <beans:bean
+            class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <beans:property name="exceptionMappings">
+            <beans:map>
+                <beans:entry key="com.seostella.spring.exception.CustomException" value="/exception/customException" />
+                <beans:entry key="com.seostella.spring.exception.SecondCustomException" value="/exception/secondCustomException" />
+            </beans:map>
+        </beans:property>
+        <beans:property name="defaultErrorView" value="/exception/defaultException" />-->
+
+
+</beans>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+             http://www.springframework.org/schema/security
+             http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+<!--
+    <security:global-method-security/>
+-->
+    <http auto-config="true">
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/loginsuccess/loginSuccess" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+        <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/user/*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+
+        <form-login login-page="/welcome/login"
+                    username-parameter="user"
+                    password-parameter="pwd"
+                    authentication-failure-url="/access_denied"
+                    default-target-url="/loginsuccess/loginSuccess"
+        />
+        <logout logout-success-url="/login?logout" />
+        <csrf disabled="true"/>
+    </http>
+    <authentication-manager>
+        <authentication-provider user-service-ref="authService"/>
+    </authentication-manager>
+
+    <beans:bean id="authService" class="by.SantBurmiy.services.authentific.AuthenticationService"/>
+
+</beans:beans>

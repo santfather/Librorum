@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="templateNone" template="/WEB-INF/view/layouts/default.jsp">
+        <put-attribute name="title" value="Books"/>
+        <put-attribute name="header" value=""/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <definition name="templateOne" template="/WEB-INF/view/layouts/default.jsp">
+        <put-attribute name="title" value="Books"/>
+        <put-attribute name="header" value="/WEB-INF/view/common/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/view/common/footer.jsp"/>
+    </definition>
+
+    <definition name="templateTwo" template="/WEB-INF/view/layouts/default.jsp">
+        <put-attribute name="title" value="Books"/>
+        <put-attribute name="header" value="/WEB-INF/view/common/headerTwo.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/view/common/footer.jsp"/>
+    </definition>
+
+
+    <definition name="welcome/login" extends="templateNone">
+        <put-attribute name="title" value="WelcomePage"/>
+        <put-attribute name="body" value="/WEB-INF/view/welcome/login.jsp"/>
+    </definition>
+
+    <definition name="loginsuccess/loginSuccess" extends="templateTwo">
+        <put-attribute name="title" value="Login-success"/>
+        <put-attribute name="body" value="/WEB-INF/view/loginsuccess/loginSuccess.jsp"/>
+    </definition>
+
+    <definition name="welcome/register" extends="templateOne">
+        <put-attribute name="title" value="Register"/>
+        <put-attribute name="body" value="/WEB-INF/view/welcome/register.jsp"/>
+    </definition>
+
+    <!-- Admins -->
+    <definition name="/admin/books" extends="templateTwo">
+        <put-attribute name="title" value="Library admin"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/books.jsp"/>
+    </definition>
+
+    <definition name="/admin/editbooks" extends="templateTwo">
+        <put-attribute name="title" value="editbooks of admin"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/editbooks.jsp"/>
+    </definition>
+
+    <definition name="/admin/users" extends="templateTwo">
+        <put-attribute name="title" value="Users of admin"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/users.jsp"/>
+    </definition>
+
+    <definition name="/admin/edituser" extends="templateTwo">
+        <put-attribute name="title" value="User edit of admin"/>
+        <put-attribute name="body" value="/WEB-INF/view/admin/edituser.jsp"/>
+    </definition>
+
+    <!-- Users -->
+
+    <definition name="/user/booksuser" extends="templateTwo">
+        <put-attribute name="title" value="Books of users"/>
+        <put-attribute name="body" value="/WEB-INF/view/user/booksuser.jsp"/>
+    </definition>
+
+    <definition name="/user/order-books" extends="templateTwo">
+        <put-attribute name="title" value="Order success"/>
+        <put-attribute name="body" value="/WEB-INF/view/user/order-books.jsp"/>
+    </definition>
+
+</tiles-definitions>
+
